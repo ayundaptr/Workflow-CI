@@ -39,11 +39,11 @@ jobs:
       - name: Install Python dependencies
         run: echo "Dependencies verified for upload"
 
-      - name: Upload to GitHub
+      - name: Upload to Google Drive
         uses: actions/upload-artifact@v4
         with:
           name: ml-model-outputs
-          path: MLProject/outputs/*
+          path: MLProject/mlruns/
 
       - name: Post Set up Python 3.12.7
         run: echo "Cleaning up python environment"
