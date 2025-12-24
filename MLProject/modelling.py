@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 
 # Load data hasil preprocessing
-df = pd.read_csv("waterquality_preprocessing/waterquality_preprocessing.csv")
+df = pd.read_csv("../waterquality_preprocessing/waterquality_preprocessing.csv")
 X = df.drop(columns=["is_safe"]) 
 y = df["is_safe"]
 
