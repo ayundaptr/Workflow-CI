@@ -2,4 +2,4 @@ name: workflow-ci-mlflow
 
 entry_points:
   main:
-    command: "python Membangun_model/modelling.py"
+    command: "python modelling.py"
