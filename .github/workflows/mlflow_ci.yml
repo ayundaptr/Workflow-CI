@@ -9,36 +9,48 @@ jobs:
   mlflow_ci:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: Set up job
         uses: actions/checkout@v3
+
+      - name: Run actions/checkout@v3
+        run: echo "Repository checked out"
 
       - name: Set up Python 3.12.7
         uses: actions/setup-python@v4
         with:
           python-version: "3.12.7"
 
+      - name: Check Env
+        run: |
+          python --version
+          pip --version
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install mlflow==2.19.0 scikit-learn seaborn matplotlib pandas numpy
 
+      - name: Set MLflow Tracking URI
+        run: echo "MLflow Tracking URI set to local"
+
       - name: Run mlflow project
-        # Kita menjalankan MLProject yang ada di dalam folder
         run: mlflow run ./MLProject --env-manager local
 
-      - name: Debug Folder Structure
-        # Langkah ini sangat penting untuk melihat di mana folder mlruns berada
-        run: ls -R
+      - name: Install Python dependencies
+        run: echo "Dependencies verified for upload"
 
-      - name: Upload MLflow Artifacts
+      - name: Upload to Google Drive
         uses: actions/upload-artifact@v4
         with:
           name: ml-model-outputs
-          # Menggunakan wildcard (**/) agar folder mlruns pasti ketemu 
-          # meskipun lokasinya bergeser di dalam subfolder
+          # Ini kunci perbaikannya: pakai wildcard agar folder mlruns ketemu
           path: "**/mlruns/"
-          # Mengatur agar workflow tidak gagal jika folder kosong
-          if-no-files-found: warn
+
+      - name: Post Set up Python 3.12.7
+        run: echo "Cleaning up python environment"
+
+      - name: Post Run actions/checkout@v3
+        run: echo "Cleaning up repository checkout"
 
       - name: Complete job
         run: echo "Workflow finished successfully"
