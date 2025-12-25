@@ -1,0 +1,11 @@
+# Mengabaikan folder log MLflow
+mlruns/
+MLProject/mlruns/
+
+# Mengabaikan folder lingkungan virtual
+.venv/
+venv/
+env/
+
+# Mengabaikan file model yang besar
+*.pkl
