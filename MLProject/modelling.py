@@ -3,6 +3,15 @@ import mlflow
 import mlflow.sklearn
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
+import os
+
+# Gunakan cara ini agar path fleksibel
+base_path = os.path.dirname(os.path.abspath(__file__))
+# Kita naik satu level (..) karena csv ada di luar folder MLProject
+csv_path = os.path.join(base_path, "..", "waterquality_preprocessing", "waterquality_preprocessing.csv")
+
+print(f"Mencoba membaca data dari: {csv_path}")
+df = pd.read_csv(csv_path)
 
 # Tambahkan print agar terminal tidak kosong
 print("Memulai proses training...")
