@@ -1,0 +1,37 @@
+artifact_path: model
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.12.7
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.5.2
+mlflow_version: 2.19.0
+model_size_bytes: 4838053
+model_uuid: 2a795e9c347942398e64f30af2c4b22f
+run_id: 9697a16ba97e43cda874219f39062057
+signature:
+  inputs: '[{"type": "double", "name": "aluminium", "required": true}, {"type": "double",
+    "name": "ammonia", "required": true}, {"type": "double", "name": "arsenic", "required":
+    true}, {"type": "double", "name": "barium", "required": true}, {"type": "double",
+    "name": "cadmium", "required": true}, {"type": "double", "name": "chloramine",
+    "required": true}, {"type": "double", "name": "chromium", "required": true}, {"type":
+    "double", "name": "copper", "required": true}, {"type": "double", "name": "flouride",
+    "required": true}, {"type": "double", "name": "bacteria", "required": true}, {"type":
+    "double", "name": "viruses", "required": true}, {"type": "double", "name": "lead",
+    "required": true}, {"type": "double", "name": "nitrates", "required": true}, {"type":
+    "double", "name": "nitrites", "required": true}, {"type": "double", "name": "mercury",
+    "required": true}, {"type": "double", "name": "perchlorate", "required": true},
+    {"type": "double", "name": "radium", "required": true}, {"type": "double", "name":
+    "selenium", "required": true}, {"type": "double", "name": "silver", "required":
+    true}, {"type": "double", "name": "uranium", "required": true}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "float64", "shape": [-1]}}]'
+  params: null
+utc_time_created: '2025-12-24 16:22:24.079122'
