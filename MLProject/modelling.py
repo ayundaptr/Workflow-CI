@@ -7,15 +7,11 @@ from sklearn.ensemble import RandomForestClassifier
 
 print("Memulai proses training BASIC...")
 
-# --- 1. Penanganan Path Data (Agar aman di Lokal & GitHub Actions) ---
+# --- Penanganan Path Baru (Data sudah di dalam MLProject) ---
 current_dir = os.path.dirname(os.path.abspath(__file__))
-# Mencoba path relatif untuk GitHub Actions/MLflow Project
-csv_path = os.path.join(current_dir, "..", "waterquality_preprocessing", "waterquality_preprocessing.csv")
 
-# Pengecekan: Jika path di atas tidak ditemukan (biasanya saat running manual di terminal tertentu)
-if not os.path.exists(csv_path):
-    # Coba path langsung ke folder
-    csv_path = os.path.join("waterquality_preprocessing", "waterquality_preprocessing.csv")
+# Karena folder data sekarang "tetangga" dengan script ini, kita langsung panggil
+csv_path = os.path.join(current_dir, "waterquality_preprocessing", "waterquality_preprocessing.csv")
 
 print(f"Membaca data dari: {csv_path}")
 
@@ -23,8 +19,14 @@ try:
     df = pd.read_csv(csv_path)
     print("Data berhasil dimuat!")
 except FileNotFoundError:
-    print(f"Error: File tidak ditemukan di {csv_path}. Pastikan struktur folder benar.")
-    exit(1)
+    # Backup: Coba cari tanpa path absolut (untuk fleksibilitas terminal)
+    csv_path_alt = os.path.join("waterquality_preprocessing", "waterquality_preprocessing.csv")
+    if os.path.exists(csv_path_alt):
+        df = pd.read_csv(csv_path_alt)
+        print("Data berhasil dimuat (via alt path)!")
+    else:
+        print(f"Error: File tetap tidak ditemukan. Cek folder MLProject kamu.")
+        exit(1)
 
 # --- 2. Persiapan Data ---
 X = df.drop(columns=["is_safe"]) 
